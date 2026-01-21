@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Crossy Road Game</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
+  </head>
+  <body>
+    
+    <div id="landing-page">
+    <div class="content">
+        <h1>CROSSY ROAD</h1>
+        <p>Gunakan tombol panah di keyboard untuk bergerak.</p>
+        <p>Capai garis finish setiap 20 langkah untuk naik level!</p>
+        <p>Hati-hati dengan air dan kendaraan!</p>
+        <button id="start-button">START GAME</button>
+    </div>
+</div>
+
+<div id="counter">LVL: 1 | 0</div>
+    <div id="counter">0</div>
+    <div id="controlls">
+      <div>
+        <button id="forward">
+          <svg width="30" height="30" viewBox="0 0 10 10">
+            <g transform="rotate(0, 5,5)">
+              <path d="M5,4 L7,6 L3,6 L5,4" />
+            </g>
+          </svg>
+        </button>
+        <button id="left">
+          <svg width="30" height="30" viewBox="0 0 10 10">
+            <g transform="rotate(-90, 5,5)">
+              <path d="M5,4 L7,6 L3,6 L5,4" />
+            </g>
+          </svg>
+        </button>
+        <button id="backward">
+          <svg width="30" height="30" viewBox="0 0 10 10">
+            <g transform="rotate(180, 5,5)">
+              <path d="M5,4 L7,6 L3,6 L5,4" />
+            </g>
+          </svg>
+        </button>
+        <button id="right">
+          <svg width="30" height="30" viewBox="0 0 10 10">
+            <g transform="rotate(90, 5,5)">
+              <path d="M5,4 L7,6 L3,6 L5,4" />
+            </g>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="end">
+      <button id="retry">GAME OVER</button>
+    </div>
+    <audio id="jumpSound" src="assets/jump.mp3"></audio>
+<audio id="deathSound" src="assets/game-over.mp3"></audio>
+  </body>
+</html>
