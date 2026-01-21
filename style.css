@@ -1,109 +1,67 @@
-@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
-/* Tambahkan di style.css */
-#landing-page {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(186, 244, 85, 0.95); /* Warna hijau rumput */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100; /* Pastikan di atas segalanya */
-    text-align: center;
+:root {
+    --bg: #050510;
+    --neon-blue: #ffffff;
+    --grad-blue: linear-gradient(135deg, #0072ff, #00d2ff);
+    --shadow: 0 0 20px rgba(0, 210, 255, 0.4);
 }
 
-#landing-page .content {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 0px rgba(0,0,0,0.2);
-    border: 5px solid black;
+body {
+    margin: 0; padding: 0; background: var(--bg);
+    color: white; font-family: 'Segoe UI', sans-serif;
+    overflow: hidden; touch-action: manipulation;
 }
 
-#landing-page h1 {
-    color: #a52523;
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    -webkit-text-stroke: 2px black;
+.screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    display: none; flex-direction: column; align-items: center;
+    justify-content: center; padding: 15px; box-sizing: border-box;
 }
 
-#landing-page p {
-    color: #333;
-    font-size: 0.5em; /* Karena font Press Start 2P cukup besar */
-    margin: 10px 0;
-    line-height: 1.5;
+.screen.active { display: flex; animation: fadeIn 0.3s forwards; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+h1 { font-size: clamp(1.2rem, 5vw, 2rem); text-shadow: var(--shadow); margin-bottom: 20px; text-align: center; }
+.panel { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 320px; text-align: center; }
+
+input { 
+    width: 90%; padding: 12px; border-radius: 10px; border: none; 
+    background: #1a1a2e; color: white; margin-bottom: 15px; text-align: center; font-size: 1rem;
 }
 
-#landing-page button {
-    background-color: #4582f4;
-    color: white;
-    padding: 15px 30px;
-    font-family: inherit;
-    font-size: 0.8em;
-    margin-top: 20px;
-    transition: transform 0.2s;
+button { 
+    padding: 12px 30px; border-radius: 50px; background: var(--grad-blue); 
+    color: white; border: none; font-weight: bold; cursor: pointer; 
+    box-shadow: var(--shadow); transition: 0.2s; 
+}
+button:active { transform: scale(0.95); }
+
+.game-header { 
+    width: 100%; max-width: 800px; display: flex; 
+    justify-content: space-between; font-size: 1.1rem; 
+    margin-bottom: 20px; color: var(--neon-blue); font-weight: bold; 
 }
 
-#landing-page button:hover {
-    transform: scale(1.1);
-    background-color: #2562d4;
-}
-body{
-    margin: 0;
-    font-family: "Press Start 2P", cursive;
-    font-size: 2em;
-    color: white;
-}
-button{
-    outline: none;
-    cursor: pointer;
-    border: none;
-    box-shadow: 3px 5px 0px 0px rgba(0,0,0,0.75);
-}
-#counter{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: black;
-    font-weight: bold;
-}
-#end{
-    position: absolute;
-    min-width: 100%;
-    min-height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    visibility: hidden;
-}
-#end button{
-    background-color: red;
-    padding: 20px 50px 20px 50px;
-    font-family: inherit;
-    font-size: inherit;
-}
-#controlls{
-    position: absolute;
-    min-width: 100%;
-    min-height: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-}
-#controlls div {
+#grid {
     display: grid;
-    grid-template-columns: 50px 50px 50px;
-    grid-template-rows: auto auto;
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    margin-bottom: 20px;
-  }
-  #controlls button {
-    width: 100%;
-    background-color: white;
-    border: 1px solid lightgray;
-  }
-  #controlls button:first-of-type {
-    grid-column: 1/-1;
-  }
-  
+    gap: 10px;
+    width: 95vw;
+    max-width: 1000px;
+    justify-content: center;
+}
+
+.card { aspect-ratio: 1/1; perspective: 1000px; width: 100%; max-width: 90px; cursor: pointer; }
+.card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.4s; transform-style: preserve-3d; }
+.card.flipped .card-inner { transform: rotateY(180deg); }
+
+.card-front, .card-back {
+    position: absolute; width: 100%; height: 100%;
+    backface-visibility: hidden; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+}
+
+.card-front { background: var(--grad-blue); border: 2px solid white; box-shadow: var(--shadow); color: white; }
+.card-back { background: #ffffff; transform: rotateY(180deg); border: 2px solid var(--neon-blue); color: #000; }
+.card.matched { opacity: 0.2; pointer-events: none; transition: 0.5s; }
+.btn-quit { margin-top: 25px; background: #444; font-size: 0.8rem; }
